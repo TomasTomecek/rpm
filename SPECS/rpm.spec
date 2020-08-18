@@ -26,6 +26,9 @@
 %bcond_without python2
 %endif
 
+%global __python3 /usr/bin/python3.8
+%global python3_sitearch %(%{__python3} -Ic "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")
+
 %define rpmhome /usr/lib/rpm
 
 %global rpmver 4.14.3
@@ -306,7 +309,7 @@ programs that will manipulate RPM packages and databases.
 %package -n python3-%{name}
 Summary: Python 3 bindings for apps which will manipulate RPM packages
 Group: Development/Libraries
-BuildRequires: python3-devel
+BuildRequires: python38-devel
 %{?python_provide:%python_provide python3-%{name}}
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 Provides: %{name}-python3 = %{version}-%{release}
@@ -439,7 +442,7 @@ done;
     %{?with_lmdb: --enable-lmdb} \
     --enable-python \
     --with-crypto=openssl \
-    PYTHON=python3
+    PYTHON=%{__python3}
 
 make %{?_smp_mflags}
 
