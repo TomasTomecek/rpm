@@ -8,7 +8,7 @@ jobs:
   trigger: commit
   metadata:
     branch: master
-    owner: "ttomecek"
+    owner: ttomecek
     project: rpm-python-38
     targets:
     - centos-stream-x86_64
